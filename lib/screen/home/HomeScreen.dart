@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -16,10 +16,11 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeScreenState extends State<HomeScreen> {
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -51,10 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: const Icon(Icons.settings),
             tooltip: '設定',
             onPressed: () {
-              // 設定ボタンをタップした時の挙動
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar'))
-              );
+              // 設定画面へ遷移する
+              context.go('/settings');
             },
           )
         ],
@@ -86,6 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            ElevatedButton(
+                child: const Text("詳細画面へ遷移する"),
+                onPressed: () {
+                  // 詳細画面へ遷移する
+                  context.go('/detail/1');
+                }
+            )
           ],
         ),
       ),
